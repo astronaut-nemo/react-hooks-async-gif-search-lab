@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import GifList from "./GifList";
+import GifSearch from './GifSearch';
 
 function GifListContainer() {
     // States
     const [gifs, setGifs] = useState([]);
-
-    // Get the search term and encode it, then pass it to the fetch as a dependancy
+    const [search ,setSearch] = useState("");
 
     // Fetch Requests
     useEffect(() =>{
@@ -14,11 +14,15 @@ function GifListContainer() {
         .then((fetchedGifs) => setGifs(fetchedGifs.data));
     }
         ,[]
-    )
-    // console.log("In GifListContainer ",gifs)
+    );
+
+    // Event Handlers
+    // Get the search term from GifSearch and encode it, then pass it to the fetch as a dependancy
+
     return (
-        <div>
+        <div style={{display: "flex", justifyContent: "space-around"}}>
             <GifList gifsData={gifs}/>
+            <GifSearch searchTerm={search}/>
         </div>
     )
 }
