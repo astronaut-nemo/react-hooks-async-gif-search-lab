@@ -1,8 +1,22 @@
+import { useState } from "react";
 
-function GifSearch({ searchTerm }){
+function GifSearch({ onFormSubmit }){
+    // States
+    const [formData, setFormData] = useState("");
+
+    // Event Handlers
+    function handleChange(event){
+        setFormData(event.target.value);
+    }
+
+    function handleSubmit(event){
+        event.preventDefault();
+        onFormSubmit(formData);
+    }
+
     return(
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label
                         className="form-label"
@@ -15,6 +29,8 @@ function GifSearch({ searchTerm }){
                         style={{display: "block"}}
                         type="text"
                         name="search"
+                        value={formData}
+                        onChange={handleChange}
                         placeholder="Search..."
                     />
                 </div>
